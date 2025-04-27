@@ -1,5 +1,8 @@
-import org.junit.jupiter.api.Test;
+package Tests;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import CPU.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ProcessorTest {
@@ -10,7 +13,39 @@ public class ProcessorTest {
                 "syscall 0"
         } ;
     var p = runProgram(program);
-    assertEquals("r0:f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,t,f,",p.output.getFirst());
+    Assertions.assertEquals("r0:f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,t,f,",p.output.getFirst());
+    }
+    @Test
+    public void testArray() {
+        String[] program = {
+                "copy 10 r5", // address 0
+                "leftshift 1 r5", // R5 holds 20
+
+                "copy 10 r4", // address 1
+                "leftshift 5 r4", // R4 holds 320
+
+                "copy 0 r5", // address 2 go to address 4
+                "call 2", // waste space
+
+                "halt", // address 3
+                "halt",
+
+                "store r5 r4", // address 4
+                "add 1 r4",
+
+                "add 1 r5", // address 5
+                "copy 0 r9",
+
+                "compare 20 r5", // address 6
+                "bne -3",
+
+                "copy 0 r9", // address 7
+                "return"
+
+
+        } ;
+        var p = runProgram(program);
+        Assertions.assertEquals("r0:f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,t,f,",p.output.getFirst());
     }
 
     @Test
@@ -36,8 +71,8 @@ public class ProcessorTest {
                 "halt" // done
         };
         var p = runProgram(program);
-        assertEquals("35:f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,t,t,f,f,f,t,f,",p.output.get(35));
-        assertEquals("36:f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,t,t,t,f,t,t,f,t,t,",p.output.get(36));
+        Assertions.assertEquals("35:f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,t,t,f,f,f,t,f,",p.output.get(35));
+        Assertions.assertEquals("36:f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,t,t,t,f,t,t,f,t,t,",p.output.get(36));
     }
     @Test
     public void testPower() {
@@ -61,8 +96,8 @@ public class ProcessorTest {
                 "return", // address 8
         } ;
         var p = runProgram(program);
-        assertEquals("r2:f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,t,f,f,",p.output.get(2));
-        assertEquals("r2:f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,t,f,t,f,t,t,t,",p.output.get(34));
+        Assertions.assertEquals("r2:f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,f,t,f,f,",p.output.get(2));
+        Assertions.assertEquals("r2:f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,f,t,f,t,f,t,t,t,",p.output.get(34));
     }
 
     private static Processor runProgram(String[] program) {

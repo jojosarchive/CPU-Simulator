@@ -1,3 +1,8 @@
+package CPU;
+
+import CPU.Adder;
+import CPU.Bit;
+
 public class ALU {
     public Word16 instruction = new Word16();
     public Word32 op1 = new Word32();
@@ -13,7 +18,7 @@ public class ALU {
         oneInBinary.getBit(31).assign(Bit.boolValues.TRUE);
         controlUnit();
         cleanUp();
-    }
+     }
 
     public void setInstruction() {
         Bit temp = new Bit(false);
@@ -26,8 +31,10 @@ public class ALU {
         shifterTemp.copy(instructionAsWord32);
     }
     public boolean isOpCode() {
+        boolean isEqual = instructionAsWord32.equals(instructionCounter);
+        //increment
         Adder.add(instructionCounter, oneInBinary, instructionCounter);
-        return instructionAsWord32.equals(instructionCounter);
+        return isEqual;
     }
 
     public void cleanUp(){
@@ -36,6 +43,7 @@ public class ALU {
         blank.copy(instructionCounter);
     }
     public static int smallerRangeToInt(Word32 op){
+
         int sum = 0;
         int index = 0;
         //5 indices
@@ -47,10 +55,8 @@ public class ALU {
         return sum;
     }
     public boolean checkIfZero(){
-        for(int i = 0; i < 31; i++){
-            Bit temp = new Bit(false);
-            result.getBitN(i, temp);
-            if(temp.getValue() == Bit.boolValues.TRUE)
+        for(int i = 0; i < 32; i++){
+            if(result.getBit(i).getValue() == Bit.boolValues.TRUE)
                 return false;
         }
         return true;
@@ -61,8 +67,11 @@ public class ALU {
 
         //interpreting an instruction then executing
 
-        //current instruction == 1 ADD
+        //current instruction == 0 Halt
         if(isOpCode())
+            System.out.println("");
+        //current instruction == 1 ADD
+        else if(isOpCode())
             Adder.add(op1, op2, result);
         //current instruction == 2 AND
         else if(isOpCode())
@@ -92,6 +101,10 @@ public class ALU {
             //check if the result is zero
             if(checkIfZero())
                 equal.assign(Bit.boolValues.TRUE);
+            else
+                equal = new Bit(false);
+
+
             //check if the number is negative
             Shifter.RightShift(result, 30, result);
             //if its negative
@@ -100,5 +113,6 @@ public class ALU {
             else
                 less.assign(Bit.boolValues.FALSE);
         }
+
     }
 }

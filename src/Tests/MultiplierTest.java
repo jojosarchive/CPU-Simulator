@@ -1,5 +1,8 @@
-import org.junit.jupiter.api.Test;
+package Tests;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import CPU.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MultiplierTest {
@@ -18,7 +21,7 @@ class MultiplierTest {
                 TestConverter.fromInt(i,iw);
                 TestConverter.fromInt(j,jw);
                 Multiplier.multiply(iw,jw,result);
-                assertEquals(i*j,TestConverter.toInt(result));
+                Assertions.assertEquals(i*j, TestConverter.toInt(result));
             }
     }
 }

@@ -1,6 +1,9 @@
+package Tests;
+
+import CPU.Bit;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
+import CPU.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Word16JoJoTest {
@@ -31,7 +34,7 @@ class Word16JoJoTest {
         for (int i = 0; i < 16; i++) {
             stripe.copy(result);
 
-            assertTrue(stripe.equals(result));
+            Assertions.assertTrue(stripe.equals(result));
         }
 
 

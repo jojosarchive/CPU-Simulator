@@ -1,3 +1,5 @@
+package CPU;
+
 public class Adder {
 
 
@@ -29,6 +31,33 @@ public class Adder {
         Bit[] sumAndCarry = new Bit[1];
         //Iterating through but starting from right
         for (int i = 31; i >= 0; i--) {
+
+            sumAndCarry = singularAdder(a.getBit(i), b.getBit(i), carryIn);
+            if (sumAndCarry[0].getValue() == Bit.boolValues.TRUE)
+                result.setBitN(i, new Bit(true));
+
+            else if (sumAndCarry[0].getValue() == Bit.boolValues.FALSE)
+                result.setBitN(i, new Bit(false));
+
+            if (sumAndCarry[1].getValue() == Bit.boolValues.TRUE)
+                carryIn.assign(Bit.boolValues.TRUE);
+
+            else if (sumAndCarry[1].getValue() == Bit.boolValues.FALSE)
+                carryIn.assign(Bit.boolValues.FALSE);
+
+        }
+    }
+    public static void addWord16(Word16 a, Word16 b, Word16 result) {
+        /*
+        case 1    case 2    case 3     case 4
+        1         1         0          0
+        1         0         1          0
+        */
+
+        Bit carryIn = new Bit(false);
+        Bit[] sumAndCarry = new Bit[1];
+        //Iterating through but starting from right
+        for (int i = 15; i >= 0; i--) {
 
             sumAndCarry = singularAdder(a.getBit(i), b.getBit(i), carryIn);
             if (sumAndCarry[0].getValue() == Bit.boolValues.TRUE)

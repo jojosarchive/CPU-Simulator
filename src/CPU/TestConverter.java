@@ -1,4 +1,7 @@
-import java.util.LinkedList;
+package CPU;
+
+import CPU.Adder;
+import CPU.Bit;
 
 public class TestConverter {
 
@@ -30,21 +33,23 @@ public class TestConverter {
     }
 
     public static int toInt(Word32 value) {
+        Word32 tempVal = new Word32();
+        value.copy(tempVal);
         boolean isNegative = false;
         int sum = 0;
         int index = 0;
 
         Bit temp = new Bit(false);
-        value.getBitN(0, temp);
+        tempVal.getBitN(0, temp);
 
         //2's complement
         if (temp.getValue() == Bit.boolValues.TRUE) {
             isNegative = true;
-            twosCompliment(value);
+            twosCompliment(tempVal);
         }
 
         for (int i = 31; i > 0; i--){
-            if (value.getBit(i).getValue() == Bit.boolValues.TRUE)
+            if (tempVal.getBit(i).getValue() == Bit.boolValues.TRUE)
                 sum += (int) Math.pow(2, index);
             index++;
         }
@@ -52,7 +57,7 @@ public class TestConverter {
         if(isNegative)
             sum = sum * -1;
 
-        resetResult(value);
+        resetResult(tempVal);
 
         return sum;
     }

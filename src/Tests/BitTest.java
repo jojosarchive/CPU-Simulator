@@ -1,5 +1,7 @@
-import org.junit.jupiter.api.Assertions;
+package Tests;
 
+import org.junit.jupiter.api.Assertions;
+import CPU.*;
 class BitTest {
 
     Bit t1, t2, f1, f2;

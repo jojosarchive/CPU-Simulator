@@ -1,5 +1,8 @@
-import org.junit.jupiter.api.Test;
+package Tests;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import CPU.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MemoryTest {
@@ -9,7 +12,7 @@ class MemoryTest {
         var m = new Memory();
         for (int i = 0; i < 1000; i++) {
             TestConverter.fromInt(i, m.address);
-            assertEquals(i, m.addressAsInt());
+            Assertions.assertEquals(i, m.addressAsInt());
         }
     }
 
@@ -24,7 +27,7 @@ class MemoryTest {
         for (int i = 0; i < 1000; i++) {
             TestConverter.fromInt(i, m.address);
             m.read();
-            assertEquals(i+4000, TestConverter.toInt(m.value));
+            Assertions.assertEquals(i+4000, TestConverter.toInt(m.value));
         }
     }
 
@@ -41,7 +44,7 @@ class MemoryTest {
         for (int i = 0; i < 1000; i++) {
             TestConverter.fromInt(i, m.address);
             m.read();
-            assertEquals(i+8000, TestConverter.toInt(m.value));
+            Assertions.assertEquals(i+8000, TestConverter.toInt(m.value));
         }
     }
 }

@@ -1,3 +1,7 @@
+package CPU;
+
+import CPU.Bit;
+
 public class Memory {
     public Word32 address= new Word32();
     public Word32 value = new Word32();

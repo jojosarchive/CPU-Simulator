@@ -1,3 +1,5 @@
+package CPU;
+
 public class Bit {
     public enum boolValues { FALSE, TRUE }
     private boolValues booleanValue;
@@ -20,7 +22,7 @@ public class Bit {
     }
 
     public void and(Bit b2, Bit result) {
-        // "Bit" references the static method
+        // "CPU.Bit" references the static method
         Bit.and(this, b2, result);
     }
 

@@ -1,5 +1,8 @@
-import org.junit.jupiter.api.Test;
+package Tests;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import CPU.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AdderTest {
@@ -23,18 +26,18 @@ class AdderTest {
     @Test
     void testTestConverter() {
         var value = new Word32();
-        assertEquals(0,TestConverter.toInt(value));
+        Assertions.assertEquals(0, TestConverter.toInt(value));
         value = new Word32(new Bit[]{
                f,f,f,f, f,f,f,f,      f,f,f,f, f,f,f,f,
                 f,f,f,f, f,f,f,f,      f,f,f,t, f,f,t,f
         });
-        assertEquals(18,TestConverter.toInt(value));
+        Assertions.assertEquals(18, TestConverter.toInt(value));
 
         value = new Word32(new Bit[]{
                 t,t,t,t, t,t,t,t,      t,t,t,t, t,t,t,t,
                 t,t,t,t, t,t,t,t,     t,t,t,f, t,f,f,t
         });
-        assertEquals(-23,TestConverter.toInt(value));
+        Assertions.assertEquals(-23, TestConverter.toInt(value));
     }
 
     @Test
@@ -42,7 +45,7 @@ class AdderTest {
         for (var i : numbers) {
             var value = new Word32();
             TestConverter.fromInt(i,value);
-            assertEquals(i, TestConverter.toInt(value));
+            Assertions.assertEquals(i, TestConverter.toInt(value));
         }
     }
 
@@ -56,7 +59,7 @@ class AdderTest {
                 TestConverter.fromInt(i, x);
                 TestConverter.fromInt(j, y);
                 Adder.add(x, y, z);
-                assertEquals(i + j, TestConverter.toInt(z));
+                Assertions.assertEquals(i + j, TestConverter.toInt(z));
 
 
             }
@@ -73,7 +76,7 @@ class AdderTest {
                 TestConverter.fromInt(i, x);
                 TestConverter.fromInt(j, y);
                 Adder.subtract(x, y, z);
-                assertEquals(i - j, TestConverter.toInt(z));
+                Assertions.assertEquals(i - j, TestConverter.toInt(z));
             }
         }
     }

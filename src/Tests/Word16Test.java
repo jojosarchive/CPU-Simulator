@@ -1,5 +1,9 @@
-import org.junit.jupiter.api.Test;
+package Tests;
 
+import CPU.Bit;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import CPU.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Word16Test {
@@ -43,13 +47,13 @@ class Word16Test {
         Word16 sw = getStripe();
         Word16 result = new Word16();
         fw.and(fw,result);
-        assertTrue(fw.equals(result));
+        Assertions.assertTrue(fw.equals(result));
         tw.and(tw,result);
-        assertTrue(tw.equals(result));
+        Assertions.assertTrue(tw.equals(result));
         sw.and(tw,result);
-        assertTrue(sw.equals(result));
+        Assertions.assertTrue(sw.equals(result));
         sw.and(sw,result);
-        assertTrue(sw.equals(result));
+        Assertions.assertTrue(sw.equals(result));
     }
 
     @Test
@@ -59,15 +63,15 @@ class Word16Test {
         Word16 sw = getStripe();
         Word16 result = new Word16();
         fw.or(fw,result);
-        assertTrue(fw.equals(result));
+        Assertions.assertTrue(fw.equals(result));
         tw.or(tw,result);
-        assertTrue(tw.equals(result));
+        Assertions.assertTrue(tw.equals(result));
         sw.or(tw,result);
-        assertTrue(tw.equals(result));
+        Assertions.assertTrue(tw.equals(result));
         sw.or(sw,result);
-        assertTrue(sw.equals(result));
+        Assertions.assertTrue(sw.equals(result));
         sw.or(fw,result);
-        assertTrue(sw.equals(result));
+        Assertions.assertTrue(sw.equals(result));
     }
 
     @Test
@@ -78,19 +82,19 @@ class Word16Test {
         Word16 sw2 = getStripe2();
         Word16 result = new Word16();
         fw.xor(fw,result);
-        assertTrue(fw.equals(result));
+        Assertions.assertTrue(fw.equals(result));
 
         tw.xor(tw,result);
-        assertTrue(fw.equals(result));
+        Assertions.assertTrue(fw.equals(result));
 
         sw.xor(tw,result);
-        assertTrue(sw2.equals(result));
+        Assertions.assertTrue(sw2.equals(result));
 
         sw.xor(sw,result);
-        assertTrue(fw.equals(result));
+        Assertions.assertTrue(fw.equals(result));
 
         sw.xor(fw,result);
-        assertTrue(sw.equals(result));
+        Assertions.assertTrue(sw.equals(result));
     }
 
     @Test
@@ -101,12 +105,12 @@ class Word16Test {
         Word16 sw2 = getStripe2();
         Word16 result = new Word16();
         fw.not(result);
-        assertTrue(tw.equals(result));
+        Assertions.assertTrue(tw.equals(result));
         tw.not(result);
-        assertTrue(fw.equals(result));
+        Assertions.assertTrue(fw.equals(result));
         sw.not(result);
-        assertTrue(sw2.equals(result));
+        Assertions.assertTrue(sw2.equals(result));
         sw2.not(result);
-        assertTrue(sw.equals(result));
+        Assertions.assertTrue(sw.equals(result));
     }
 }

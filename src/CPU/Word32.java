@@ -1,3 +1,5 @@
+package CPU;
+
 public class Word32 {
     private Bit[] longWord;
 
@@ -17,6 +19,13 @@ public class Word32 {
                 this.longWord[i] = new Bit(false);
             }
         }
+    }
+    public Word32(Bit t) {
+        this.longWord = new Bit[32];
+        for(int i = 0; i < 32; i++){
+            this.longWord[i] = new Bit(false);
+        }
+        this.longWord[31].assign(Bit.boolValues.TRUE);
     }
 
 

@@ -1,8 +1,10 @@
+package CPU;
+
 public class Word16 {
 
     public Bit[] word;
 
-    // default constructor that makes an empty instance of "Word16"
+    // default constructor that makes an empty instance of "CPU.Word16"
     public Word16() {
         this.word = new Bit[16];
         for(int i = 0; i < 16; i++) {
@@ -10,7 +12,7 @@ public class Word16 {
 
         }
     }
-    // overloaded constructor that populates and instance of "Word16" with an array of bits
+    // overloaded constructor that populates and instance of "CPU.Word16" with an array of bits
     public Word16(Bit[] in) {
         this.word = new Bit[16];
         System.arraycopy(in, 0, this.word, 0, 16);

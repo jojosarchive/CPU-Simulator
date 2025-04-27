@@ -1,7 +1,10 @@
+package Tests;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+import CPU.*;
 class AssemblerTest {
 
     private final String[][] instructions = {
@@ -44,10 +47,10 @@ class AssemblerTest {
                 "subtract 10 r4"
         };
         var response = Assembler.assemble(myFirstProgram);
-        assertEquals("fffftffffftffftf",response[0]);
-        assertEquals("ftfffffffttfftff",response[1]);
-        assertEquals("ftftffffffffffff",response[2]);
-        assertEquals("fftfttftftffftff",response[3]);
+        Assertions.assertEquals("fffftffffftffftf",response[0]);
+        Assertions.assertEquals("ftfffffffttfftff",response[1]);
+        Assertions.assertEquals("ftftffffffffffff",response[2]);
+        Assertions.assertEquals("fftfttftftffftff",response[3]);
     }
     @Test
     void testInstructions() {
@@ -56,7 +59,7 @@ class AssemblerTest {
             prog[0] = instruction[0];
             assertEquals(16,instruction[1].length(), "Instruction " + instruction[0] + " correct answer is wrong length");
             var result = Assembler.assemble(prog);
-            assertEquals(instruction[1],result[0],"Instruction " + instruction[0] + " failed");
+            Assertions.assertEquals(instruction[1],result[0],"Instruction " + instruction[0] + " failed");
         }
     }
 }

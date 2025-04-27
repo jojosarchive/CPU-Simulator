@@ -1,5 +1,8 @@
+package CPU;
+
+import CPU.Bit;
+
 import java.util.HashMap;
-import java.util.Map;
 
 public class Assembler {
     public  Assembler(){
@@ -167,6 +170,7 @@ public class Assembler {
         Word32 shifterTemp = new Word32();
         if (assemblyWord.length == 2) {
             intermediateValueSize = 11;
+            // CPU.Shifter.LeftShift(binary, 21, shifterTemp);
             Shifter.LeftShift(binary, 21, shifterTemp);
         }
         else {
@@ -185,23 +189,26 @@ public class Assembler {
     }
 
     public static String[] finalOutput(String[] input) {
-      int outputSize = (input.length + 1) / 2;
-       String[] f = new String[outputSize];
-
-        // keeps track of what instruction we are writing to
-
-        for (int i = 0; i < outputSize; i++) {
-            String upperHalf = input[i * 2];
-            String lowerHalf = "";
-
-            if (input[(i * 2) + 1] == null) {
-                lowerHalf = "ffffffffffffffff";
-            } else
-                lowerHalf = input[(i * 2) + 1];
-
-            f[i] = upperHalf + lowerHalf;
-        }
-
+        int outputSizeWithExtraSPace = (input.length + 1) / 2;
+        String[] f = new String[outputSizeWithExtraSPace];
+        // placeholder
+        String word32 = "";
+        String halt = "ffffffffffffffff";
+        int index = 0;
+            //add all strings in two pairs
+            for (String string : input) {
+                word32 += string;
+                if (word32.length() == 32) {
+                    f[index] = word32;
+                    index++;
+                    word32 = "";
+                }
+            }
+            //if its uneven add a halt to the end
+            if (input.length % 2 != 0) {
+                word32 += halt;
+                f[index] = word32;
+            }
         return f;
     }
 }

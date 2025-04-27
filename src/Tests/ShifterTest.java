@@ -1,5 +1,8 @@
-import org.junit.jupiter.api.Test;
+package Tests;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import CPU.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ShifterTest {
@@ -15,7 +18,7 @@ class ShifterTest {
                 TestConverter.fromInt(number, word);
                 Shifter.LeftShift(word, factor, result);
                 int expected = number * ((int) Math.pow(2, factor ));
-                assertEquals(expected, TestConverter.toInt(result));
+                Assertions.assertEquals(expected, TestConverter.toInt(result));
             }
         }
     }
@@ -29,7 +32,7 @@ class ShifterTest {
                     TestConverter.fromInt(number, word);
                     Shifter.RightShift(word, factor, result);
                     int expected = number / ((int) Math.pow(2, factor ));
-                    assertEquals( expected,TestConverter.toInt(result));
+                    Assertions.assertEquals( expected, TestConverter.toInt(result));
                 }
             }
     }
